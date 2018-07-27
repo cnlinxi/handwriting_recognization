@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">数字手势识别</string>
+    <string name="add_new_gesture">添加新字迹</string>
+    <string name="title_activity_add_new_gesture">AddNewGesture</string>
+    <string name="addNewGesture_step1">step1：选取新字迹图片</string>
+    <string name="btnAddNewGesture">选取字迹</string>
+    <string name="addNewGesture_step2">为字迹添加备注</string>
+    <string name="whoseGesture">这是谁的字迹？</string>
+    <string name="btnAdd">添加</string>
+    <string name="cancle">取消</string>
+</resources>
