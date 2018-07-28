@@ -2,13 +2,14 @@
     <string name="app_name">HandwritingRecognization</string>
     <string name="action_settings">Settings</string>
 
-    <string name="add_new_gesture">添加新字迹</string>
+    <string name="add_new_gesture">Add new handwriting</string>
     <string name="title_activity_add_new_gesture">AddNewGesture</string>
-    <string name="addNewGesture_step1">step1：选取新字迹图片</string>
-    <string name="btnAddNewGesture">选取字迹</string>
-    <string name="addNewGesture_step2">step2：为字迹添加备注</string>
-    <string name="whoseGesture">这是谁的字迹？</string>
-    <string name="btnAdd">添加</string>
-    <string name="cancle">取消</string>
-    <string name="btnCheck">鉴定</string>
+    <string name="addNewGesture_step1">Step1: select new handwriting pictures</string>
+    <string name="btnAddNewGesture">select handwriting</string>
+    <string name="addNewGesture_step2">Step2: add notes to the handwriting</string>
+    <string name="whoseGesture">Whose handwriting is this?</string>
+    <string name="btnAdd">add</string>
+    <string name="cancle">Cancel</string>
+    <string name="btnCheck">identify</string>
+    <string name="first_page_message">First click the hover button to add the handwriting, and then select the image here to identify the similarity between the handwrting</string>
 </resources>

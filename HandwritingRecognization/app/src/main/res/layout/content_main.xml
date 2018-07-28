@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/linear_margin_top"
             android:layout_marginStart="@dimen/linear_margin_left"
             android:textSize="@dimen/tvFontSize"
-            android:text="this is some message"/>
+            android:text="@string/first_page_message"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

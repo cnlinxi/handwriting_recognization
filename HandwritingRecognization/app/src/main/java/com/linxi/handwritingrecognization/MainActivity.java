@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private void checkWriting() {
         float[] originVector=(float[]) SharedPreferenceUtils.getBean(MainActivity.this,VECTOR);
         if(originVector==null){
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String writingNote=(String)SharedPreferenceUtils.getBean(MainActivity.this,WRITINGNOTE);
         float[] vector=classifier.getVector(resizedImage);
         double likelook=classifier.cosine(vector,originVector);
-        tvResult.setText(String.valueOf(likelook));
+        tvResult.setText(String.format("the similarity of handwriting with %s is: %6f",writingNote,likelook));
     }
 
     public void openAlbum(){
