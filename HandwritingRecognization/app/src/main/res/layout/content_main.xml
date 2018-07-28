@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/btnAddPicture"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/linear_margin_top"
+            android:background="@drawable/ic_add_opacity17_24dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCheckWriting"
+            android:text="@string/btnCheck"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvResult"
+            android:layout_marginTop="@dimen/linear_margin_top"
+            android:layout_marginStart="@dimen/linear_margin_left"
+            android:textSize="@dimen/tvFontSize"
+            android:text="this is some message"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

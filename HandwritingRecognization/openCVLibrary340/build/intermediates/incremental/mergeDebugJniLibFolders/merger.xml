@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Git\Chinese-number-gestures-recognition-master\DigitalGestureRecognition\openCVLibrary340\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\Git\Chinese-number-gestures-recognition-master\DigitalGestureRecognition\openCVLibrary340\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Git\handwriting_recognization\HandwritingRecognization\openCVLibrary340\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\Git\handwriting_recognization\HandwritingRecognization\openCVLibrary340\src\debug\jniLibs"/></dataSet></merger>

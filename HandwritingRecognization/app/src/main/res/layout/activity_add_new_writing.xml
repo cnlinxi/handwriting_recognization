@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewWriting">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addNewGesture_step1"
+            android:textSize="@dimen/tvFontSize"
+            android:layout_marginTop="@dimen/linear_margin_top"
+            android:layout_marginStart="@dimen/linear_margin_left"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnChooseWriting"
+            android:layout_marginStart="@dimen/linear_margin_left"
+            android:text="@string/btnAddNewGesture"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addNewGesture_step2"
+            android:textSize="@dimen/tvFontSize"
+            android:layout_marginTop="@dimen/linear_margin_top"
+            android:layout_marginStart="@dimen/linear_margin_left"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etGestureNote"
+            android:layout_marginLeft="@dimen/linear_margin_left"
+            android:layout_marginRight="@dimen/linear_margin_left"
+            android:hint="@string/whoseGesture"
+            android:inputType="text"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAddWriting"
+            android:layout_marginTop="@dimen/linear_margin_left"
+            android:text="@string/btnAdd"/>
+
+        <ImageView
+            android:id="@+id/clip_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvShowMessage"
+            android:textSize="@dimen/tvFontSize"
+            android:layout_marginTop="@dimen/linear_margin_top"
+            android:layout_marginStart="@dimen/linear_margin_left"
+            android:text="this is some message"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivPicture"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
