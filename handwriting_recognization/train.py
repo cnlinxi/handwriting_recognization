@@ -119,16 +119,16 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
 
 if __name__ == '__main__':
     ### cnn model
-    print('载入数据集: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    X_train, y_train = data_utils.load_dataset()
-    print('开始训练: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=1)
-    print('训练结束: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-
-    ### capsule network
     # print('载入数据集: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
     # X_train, y_train = data_utils.load_dataset()
     # print('开始训练: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    # caps=capsule(batch_size=32)
-    # caps.train_and_save(X_train,y_train,lamda=1e-4,num_epochs=1)
+    # cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=1)
     # print('训练结束: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+
+    ### capsule network
+    print('载入数据集: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+    X_train, y_train = data_utils.load_dataset()
+    print('开始训练: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+    caps=capsule(batch_size=32)
+    caps.train_and_save(X_train,y_train,lamda=1e-4,num_epochs=1)
+    print('训练结束: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))

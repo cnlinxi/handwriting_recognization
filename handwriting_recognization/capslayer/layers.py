@@ -74,7 +74,7 @@ def primaryCaps(input, filters,
                             kernel_size=kernel_size,
                             strides=strides, activation=None,
                             activity_regularizer=regularizer)
-    pose_shape = pose.get_shape().as_list()[:3] + [filters] + out_caps_shape
+    pose_shape = [-1]+pose.get_shape().as_list()[1:3] + [filters] + out_caps_shape
     pose = tf.reshape(pose, shape=pose_shape)
 
     if method == 'logistic':
