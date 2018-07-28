@@ -113,7 +113,7 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
         output_graph_def = graph_util.convert_variables_to_constants(sess, sess.graph_def,
                                                                      output_node_names=['predict'])
         with tf.gfile.FastGFile(os.path.join('model','gesture.pb'),
-                                mode='wb') as f:  # ’wb’中w代表写文件，b代表将数据以二进制方式写入文件。
+                                mode='wb') as f:  # 'wb中w代表写文件，b代表将数据以二进制方式写入文件。
             f.write(output_graph_def.SerializeToString())
 
 

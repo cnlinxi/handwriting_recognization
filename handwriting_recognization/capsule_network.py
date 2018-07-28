@@ -31,12 +31,13 @@ class capsule(object):
 
         with tf.variable_scope('primary_layer'):
             primary_caps, activation = capslayer.layers.primaryCaps(conv1, filters=32, kernel_size=9,
-                                                                    strides=2, out_caps_shape=[8, 1])
+                                                                    strides=2, out_caps_shape=[8, 1],method='logistic')
         with tf.variable_scope('digit_layer'):
             primary_caps = tf.reshape(primary_caps, shape=[self.batch_size, -1, 8, 1])
             self.digit_caps, self.activation = capslayer.layers.fully_connected(primary_caps, activation,
                                                                                 num_outputs=self.num_classes,
-                                                                                out_caps_shape=[16, 1])
+                                                                                out_caps_shape=[16, 1],
+                                                                                routing_method='DynamicRouting')
 
         # input: [None,-1]
         # output: [None,global_vals.output_dim_vectors]
@@ -57,7 +58,7 @@ class capsule(object):
         # cost function
         regularizer=tf.contrib.layers.l2_regularizer(1e-4)
         regulazation=regularizer(W_fc)+regularizer(W_fc2)
-        cost=tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y,logits=z_fc2))+regulazation
+        cost=tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y,logits=z_fc2))+regulazation
 
         train=tf.train.AdadeltaOptimizer().minimize(cost)
         pred=tf.argmax(prob,axis=1,output_type='int32',name='predict')

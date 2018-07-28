@@ -26,11 +26,13 @@ def fully_connected(inputs, activation,
         activation: [batch_size, num_outputs]
     '''
     in_pose_shape = inputs.get_shape().as_list()
-    num_inputs = in_pose_shape[1]
+    # in_pose_shape=tf.shape(inputs) # dynamic shape, i can not get its shape without feed_dict
+    num_inputs = 24*24*32
     batch_size = in_pose_shape[0]
     T_size = get_transformation_matrix_shape(in_pose_shape[-2:], out_caps_shape)
     T_shape = [1, num_inputs, num_outputs] + T_size
-    T_matrix = tf.get_variable('transformation_matrix', shape=T_shape)
+    # T_matrix = tf.get_variable('transformation_matrix', shape=T_shape)
+    T_matrix=tf.get_variable(name='transformation_matrix',shape=T_shape)
     T_matrix = tf.tile(T_matrix, [batch_size, 1, 1, 1, 1])
     inputs = tf.tile(tf.expand_dims(inputs, axis=2), [1, 1, num_outputs, 1, 1])
     with tf.variable_scope('transformation'):
@@ -38,7 +40,8 @@ def fully_connected(inputs, activation,
         vote = tf.matmul(T_matrix, inputs)
     with tf.variable_scope('routing'):
         if routing_method == 'EMRouting':
-            activation = tf.reshape(activation, shape=activation.get_shape().as_list() + [1, 1])
+            shape=[-1]+activation.get_shape().as_list()[1:]+[1,1]
+            activation = tf.reshape(activation, shape=shape)
             vote = tf.reshape(vote, shape=[batch_size, num_inputs, num_outputs, -1])
             pose, activation = routing(vote, activation, num_outputs, out_caps_shape, routing_method)
             pose = tf.reshape(pose, shape=[batch_size, num_outputs] + out_caps_shape)
