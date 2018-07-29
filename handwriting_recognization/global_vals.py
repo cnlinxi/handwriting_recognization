@@ -12,5 +12,5 @@ data_path='data'
 origin_picture_root_dir='data'
 h5_file_path=os.path.join(origin_picture_root_dir,'resized_image.h5')
 resized_image_size=64
-output_dim_vectors=128 # 输出最终提取到的特征向量维度
-num_classes=15 # 笔记识别中，训练集中共有多少人的笔迹
+output_dim_vectors=200 # the dimension of final output feature vector
+num_classes=15 # how many people in the training set in handwriting recognition

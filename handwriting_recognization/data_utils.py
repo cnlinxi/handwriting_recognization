@@ -22,7 +22,7 @@ from sklearn.preprocessing import LabelEncoder
 
 import global_vals
 
-# 压缩图片,把图片压缩成global_vals.resized_image_size*global_vals.resized_image_size的
+# resize image, resize the image to (global_vals.resized_image_size*global_vals.resized_image_size)
 def resize_img():
     resized_dir=os.path.join(global_vals.data_path,'resized')
     if not os.path.exists(resized_dir):
@@ -41,7 +41,7 @@ def resize_img():
             resized_im=resised.eval()
             scipy.misc.imsave(os.path.join(resized_dir,filename),resized_im)
 
-# 图片转h5文件
+# image to h5 file
 def image_to_h5():
     resized_dir=os.path.join(global_vals.data_path,'resized')
     if not os.path.exists(resized_dir):
@@ -68,7 +68,7 @@ def load_dataset():
         resize_img()
         image_to_h5()
     data = h5py.File(global_vals.h5_file_path, 'r')
-    X_data = np.array(data['X'])  # data['X']是h5py._hl.dataset.Dataset类型，转化为array
+    X_data = np.array(data['X'])  # data['X'] is h5py._hl.dataset.Dataset, transform to array
     Y_data = np.array(data['Y'])
     X_data = X_data / 255.
     # one-hot
@@ -78,7 +78,7 @@ def load_dataset():
 
     return X_data, y_data
 
-# 数据增强
+# enhance data
 # https://keras-cn.readthedocs.io/en/latest/preprocessing/image/
 def data_augmentation():
     X_train, X_test=load_dataset()
@@ -93,12 +93,12 @@ def data_augmentation():
     train_generator.fit(X_train)
     return train_generator
 
-# h5 转 image
+# h5 to image
 def h5_to_img():
     X_train_orig, Y_train_orig, X_test_orig, Y_test_orig = load_dataset()
 
     index = 1
-    # 训练集
+    # train set
     train_dir = os.path.join(global_vals.data_path, 'train')
     if not os.path.exists(train_dir):
         os.mkdir(train_dir)
@@ -108,7 +108,7 @@ def h5_to_img():
                    arr=X_train_orig[i])
         index += 1
 
-    # 测试集
+    # test set
     test_dir = os.path.join(global_vals.data_path, 'test')
     if not os.path.exists(test_dir):
         os.mkdir(test_dir)

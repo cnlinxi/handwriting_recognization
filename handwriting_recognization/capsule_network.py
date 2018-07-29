@@ -73,11 +73,12 @@ class capsule(object):
                 train_generator = data_utils.data_augmentation()
                 minibatch_cost = None
                 batches = 0
-                for X_data, y_data in train_generator.flow(X_train, y_train):
+                for X_data, y_data in train_generator.flow(X_train, y_train,batch_size=self.batch_size):
                     _, minibatch_cost = sess.run([train, cost],
                                                  feed_dict={X: X_data, y: y_data, lam:lamda})
                     batches += 1
-                    if batches >= X_train.shape[0]: # that is 32 duplicates per image
+                    # print('batches:',batches)
+                    if batches >= X_train.shape[0]:
                         break
                 if epoch % 10 == 0:
                     print(str((time.strftime('%Y-%m-%d %H:%M:%S'))))

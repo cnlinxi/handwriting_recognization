@@ -58,15 +58,15 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
 
     # full connection1
     # output: [None,200]
-    W_fc1 = weight_variable([16 * 16 * 64, 200])
-    b_fc1 = bias_variable([200])
+    W_fc1 = weight_variable([16 * 16 * 64, global_vals.output_dim_vectors])
+    b_fc1 = bias_variable([global_vals.output_dim_vectors])
     maxpool2_flat = tf.reshape(maxpool2, [-1, 16 * 16 * 64])
     z_fc1 = tf.nn.relu(tf.matmul(maxpool2_flat, W_fc1) + b_fc1,name='output_vector')
     z_fc1_drop = tf.nn.dropout(z_fc1, keep_prob=kp)
 
     # softmax layer
     # output: [None,num_classes]
-    W_fc2 = weight_variable([200,global_vals.num_classes])
+    W_fc2 = weight_variable([global_vals.output_dim_vectors,global_vals.num_classes])
     b_fc2 = bias_variable([global_vals.num_classes])
     z_fc2 = tf.add(tf.matmul(z_fc1_drop, W_fc2), b_fc2, name='outlayer')
     prob = tf.nn.softmax(z_fc2, name='probability')
@@ -74,11 +74,12 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
     # cost function
     regularizer = tf.contrib.layers.l2_regularizer(lam)
     regularization = regularizer(W_fc1) + regularizer(W_fc2)
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=z_fc2)) + regularization
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=z_fc2)) + regularization
 
     train = tf.train.AdamOptimizer().minimize(cost)
     # output_type='int32', name="predict"
-    pred = tf.argmax(prob, 1, output_type='int32', name='predict')  # 输出结点名称predict方便后面保存为pb文件
+    # The output node named 'predict' which can be saved as a .pb file
+    pred = tf.argmax(prob, 1, output_type='int32', name='predict')
     correct_prediction = tf.equal(pred, tf.argmax(y, 1, output_type='int32'))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     tf.set_random_seed(2018)  # to keep consistent results
@@ -99,7 +100,6 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
                 print(str((time.strftime('%Y-%m-%d %H:%M:%S'))))
                 print('cost after epoch {} :{}'.format(epoch,minibatch_cost))
 
-        # 这个accuracy是前面的accuracy，tensor.eval()和Session.run区别很小
         train_acc = accuracy.eval(feed_dict={X: X_train[:100], y: y_train[:100], kp: 0.8, lam: lamda})
         print('train accuracy', train_acc)
 
@@ -109,26 +109,26 @@ def cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=450):
         if not os.path.exists('model'):
             os.mkdir('model')
         saver.save(sess, os.path.join('model','cnn_model.ckpt'))
-        # 将训练好的模型保存为.pb文件，方便在Android studio中使用
+        # save the trained model as .pb file for using in Android studio
         output_graph_def = graph_util.convert_variables_to_constants(sess, sess.graph_def,
                                                                      output_node_names=['predict'])
         with tf.gfile.FastGFile(os.path.join('model','gesture.pb'),
-                                mode='wb') as f:  # 'wb中w代表写文件，b代表将数据以二进制方式写入文件。
+                                mode='wb') as f:
             f.write(output_graph_def.SerializeToString())
 
 
 if __name__ == '__main__':
-    ### cnn model
+    ### cnn model(lenet-5)
+    print('load dataset: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+    X_train, y_train = data_utils.load_dataset()
+    print('start train: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+    cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=1)
+    print('train finish: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
+
+    ### capsule network
     # print('载入数据集: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
     # X_train, y_train = data_utils.load_dataset()
     # print('开始训练: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    # cnn_model(X_train, y_train, keep_prob=0.8, lamda=1e-4, num_epochs=1)
+    # caps=capsule(batch_size=8)
+    # caps.train_and_save(X_train,y_train,lamda=1e-4,num_epochs=1)
     # print('训练结束: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-
-    ### capsule network
-    print('载入数据集: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    X_train, y_train = data_utils.load_dataset()
-    print('开始训练: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))
-    caps=capsule(batch_size=32)
-    caps.train_and_save(X_train,y_train,lamda=1e-4,num_epochs=1)
-    print('训练结束: ' + str((time.strftime('%Y-%m-%d %H:%M:%S'))))

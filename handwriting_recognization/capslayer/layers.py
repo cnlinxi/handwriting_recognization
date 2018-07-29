@@ -26,8 +26,13 @@ def fully_connected(inputs, activation,
         activation: [batch_size, num_outputs]
     '''
     in_pose_shape = inputs.get_shape().as_list()
+    # it confuses me a lot. please refer to https://blog.csdn.net/loseinvain/article/details/78762739
     # in_pose_shape=tf.shape(inputs) # dynamic shape, i can not get its shape without feed_dict
-    num_inputs = 24*24*32
+    # num_inputs=in_pose_shape.eval()[1]
+    num_inputs = 24*24*32 # 18432
+    # with tf.Session() as sess:
+    #     num_outputs=sess.run(tf.shape(inputs))
+    # num_inputs=tf.unstack(tf.shape(num_outputs))[1]
     batch_size = in_pose_shape[0]
     T_size = get_transformation_matrix_shape(in_pose_shape[-2:], out_caps_shape)
     T_shape = [1, num_inputs, num_outputs] + T_size
