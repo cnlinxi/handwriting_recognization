@@ -2,11 +2,7 @@
 
 Recognize handwriting and migrate the trained model to Android application.
 
-![](http://7xrvee.com1.z0.glb.clouddn.com/18-7-29/43393991.jpg)
-
-![](http://7xrvee.com1.z0.glb.clouddn.com/18-7-29/47988122.jpg)
-
-
+![](http://7xrvee.com1.z0.glb.clouddn.com/18-7-29/9821526.jpg)
 
 ### Get started
 
